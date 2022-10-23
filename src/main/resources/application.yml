@@ -1,0 +1,18 @@
+server:
+  port: 8090
+
+spring:
+  output:
+    ansi:
+      enabled: always
+  datasource:
+    username: ${USER_DB}
+    password: ${PASS_DB}
+    url: jdbc:mysql://localhost:3306/d3_horas?useSSL=false
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
