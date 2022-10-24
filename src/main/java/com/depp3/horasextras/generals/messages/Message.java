@@ -9,7 +9,7 @@ public enum Message {
     private int value;
     private String reason;
 
-    private Message(int value, String reason) {
+    Message(int value, String reason) {
         this.value = value;
         this.reason = reason;
     }

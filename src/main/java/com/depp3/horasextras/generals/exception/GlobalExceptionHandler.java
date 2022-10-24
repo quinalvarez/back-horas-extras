@@ -2,7 +2,6 @@ package com.depp3.horasextras.generals.exception;
 
 import com.depp3.horasextras.app.employees.exception.EmployeeException;
 import com.depp3.horasextras.generals.exception.response_body.error_message.ErrorMessage;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,7 +21,7 @@ public class GlobalExceptionHandler {
                         ex.getCode(),
                         request.getRequestURI()
                 ),
-                HttpStatus.BAD_REQUEST
+                ex.getStatus()
         );
     }
 }
