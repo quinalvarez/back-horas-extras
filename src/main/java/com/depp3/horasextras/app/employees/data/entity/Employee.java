@@ -9,14 +9,16 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String dni;
     private String name;
     private String lastname;
     private Boolean isActive;
 
     public Employee() {}
 
-    public Employee(Long id, String name, String lastname, Boolean isActive) {
+    public Employee(Long id, String dni, String name, String lastname, Boolean isActive) {
         this.id = id;
+        this.dni = dni;
         this.name = name;
         this.lastname = lastname;
         this.isActive = isActive;
@@ -28,6 +30,14 @@ public class Employee {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 
     public String getName() {

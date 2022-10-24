@@ -6,6 +6,8 @@ import com.depp3.horasextras.app.employees.data.repository.EmployeeRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Service
 public class EmployeeService {
 
@@ -22,6 +24,12 @@ public class EmployeeService {
     }
 
     public EmployeeDTO save(EmployeeDTO employee) {
+        if (repository.existsByDni(employee.getDni())) {
+            throw new RuntimeException("El empleado ya existe");
+        }
+        if (Objects.isNull(employee.getDni()) || employee.getDni().equals("")) {
+            throw new RuntimeException("Debe ingresar un dni valido");
+        }
         return mapper.toDTO(repository.save(mapper.toDomain(employee)));
     }
 }
