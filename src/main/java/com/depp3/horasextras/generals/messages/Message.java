@@ -3,15 +3,17 @@ package com.depp3.horasextras.generals.messages;
 public enum Message {
 
     // EMPLOYEES
-    EXIST(1000, "Ya existe un empleado con el dni ingresado"),
-    INVALID_DNI(1001, "Ingrese un dni valido");
+    EXIST(1000, "Ya existe un empleado con el dni ingresado", InternalMessage.EMP_SAVE_METHOD.value()),
+    INVALID_DNI(1001, "Ingrese un dni valido", InternalMessage.EMP_SAVE_METHOD.value());
 
-    private int value;
-    private String reason;
+    private final int value;
+    private final String reason;
+    private final String internalMessage;
 
-    Message(int value, String reason) {
+    Message(int value, String reason, String internalMessage) {
         this.value = value;
         this.reason = reason;
+        this.internalMessage = internalMessage;
     }
 
     public int value(){
@@ -20,5 +22,24 @@ public enum Message {
 
     public String reason() {
         return reason;
+    }
+
+    public String internalMessage() {
+        return internalMessage;
+    }
+
+    public static enum InternalMessage {
+        // EMPLOYEES
+        EMP_SAVE_METHOD("Error en ServiceEmployee.save(EmployeeDTO)");
+
+        private final String message;
+
+        InternalMessage(String message) {
+            this.message = message;
+        }
+
+        public String value() {
+            return message;
+        }
     }
 }
