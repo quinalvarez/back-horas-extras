@@ -11,7 +11,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
@@ -29,8 +31,6 @@ public class EmployeeService {
     }
 
     public EmployeeDTO save(EmployeeDTO employee) {
-        String object = Jsons.convertObjectToJson(employee);
-
         if (repository.existsByDni(employee.getDni())) {
             throw new EmployeeException(
                     HttpStatus.BAD_REQUEST,
@@ -48,5 +48,17 @@ public class EmployeeService {
         }
 
         return mapper.toDTO(repository.save(mapper.toDomain(employee)));
+    }
+
+    public List<EmployeeDTO> findAll() {
+        return repository.findAllOrderActive().stream()
+                .map(mapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<EmployeeDTO> findAllActive() {
+        return repository.findAllActive().stream()
+                .map(mapper::toDTO)
+                .collect(Collectors.toList());
     }
 }

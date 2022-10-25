@@ -2,41 +2,27 @@ package com.depp3.horasextras.app.employees.data.dto;
 
 public class EmployeeDTO {
 
-    private Long id;
     private String dni;
     private String name;
     private String lastname;
-    private Boolean isActive;
+    private String active;
 
     public EmployeeDTO() {
         clear();
     }
 
     public EmployeeDTO(String dni, String name, String lastname, Boolean isActive) {
-        this(null, dni, name, lastname, isActive);
-    }
-
-    public EmployeeDTO(Long id, String dni, String name, String lastname, Boolean isActive) {
-        this.id = id;
+        this.dni = dni;
         this.name = name;
         this.lastname = lastname;
-        this.isActive = isActive;
+        this.active = isActive ? "ACTIVE" : "INACTIVE";
     }
 
     private void clear() {
-        id = null;
         dni = "";
         name = "";
         lastname = "";
-        isActive = true;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+        active = "ACTIVE";
     }
 
     public String getDni() {
@@ -63,11 +49,11 @@ public class EmployeeDTO {
         this.lastname = lastname;
     }
 
-    public Boolean getActive() {
-        return isActive;
+    public String getActive() {
+        return active;
     }
 
-    public void setActive(Boolean active) {
-        isActive = active;
+    public void setActive(String active) {
+        this.active = active;
     }
 }

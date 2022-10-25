@@ -7,17 +7,15 @@ public class EmployeeMapper {
 
     public Employee toDomain(EmployeeDTO employeeDTO) {
         return new Employee(
-                employeeDTO.getId(),
                 employeeDTO.getDni(),
                 employeeDTO.getName(),
                 employeeDTO.getLastname(),
-                employeeDTO.getActive()
+                employeeDTO.getActive().equals("ACTIVE")
         );
     }
 
     public EmployeeDTO toDTO(Employee employee) {
         return new EmployeeDTO(
-                employee.getId(),
                 employee.getDni(),
                 employee.getName(),
                 employee.getLastname(),

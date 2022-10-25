@@ -7,8 +7,6 @@ import javax.persistence.*;
 public class Employee {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String dni;
     private String name;
     private String lastname;
@@ -16,20 +14,11 @@ public class Employee {
 
     public Employee() {}
 
-    public Employee(Long id, String dni, String name, String lastname, Boolean isActive) {
-        this.id = id;
+    public Employee(String dni, String name, String lastname, Boolean isActive) {
         this.dni = dni;
         this.name = name;
         this.lastname = lastname;
         this.isActive = isActive;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getDni() {
