@@ -39,7 +39,7 @@ public class EmployeeController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<EmployeeDTO>> findAll(@RequestParam(required = false, defaultValue = "0") Integer tipo) {
+    public ResponseEntity<List<EmployeeDTO>> findAll(@RequestParam(required = false, defaultValue = "2") Integer tipo) {
         return ResponseEntity.ok(service.findAll(tipo));
     }
 

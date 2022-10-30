@@ -14,9 +14,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import javax.transaction.Transactional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -55,24 +54,9 @@ public class EmployeeService {
         return mapper.toDTO(repository.save(mapper.toDomain(employee)));
     }
 
+    @Transactional
     public List<EmployeeDTO> findAll(Integer tipo) {
-        List<EmployeeDTO> employees = new ArrayList<>();
-
-        if (tipo == 0) {
-            employees = repository.findAllOrderActive().stream()
-                    .map(mapper::toDTO)
-                    .collect(Collectors.toList());
-        } else if (tipo == 1) {
-            employees = repository.findAllActive().stream()
-                    .map(mapper::toDTO)
-                    .collect(Collectors.toList());
-        } else if (tipo == 2){
-            employees = repository.findAllInactive().stream()
-                    .map(mapper::toDTO)
-                    .collect(Collectors.toList());
-        }
-
-        return employees;
+        return repository.findAllEmployees(tipo).stream().map(mapper::toDTO).collect(Collectors.toList());
     }
 
     public EmployeeDTO findByDni(String dni) {
