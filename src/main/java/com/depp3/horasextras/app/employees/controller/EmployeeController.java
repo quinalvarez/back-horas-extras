@@ -2,6 +2,12 @@ package com.depp3.horasextras.app.employees.controller;
 
 import com.depp3.horasextras.app.employees.data.dto.EmployeeDTO;
 import com.depp3.horasextras.app.employees.service.EmployeeService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,8 +23,18 @@ public class EmployeeController {
         this.service = service;
     }
 
+    @Operation(summary = "Guardar un empleado cuando el dni no se encuentre en la base")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Se guardo con exito",
+                content = { @Content (mediaType = "application/json",
+                    schema = @Schema(implementation = EmployeeDTO.class)) }),
+            @ApiResponse(responseCode = "400", description = "El empleado ya existe",
+                content = @Content),
+            @ApiResponse(responseCode = "400", description = "Ingrese un dni valido")
+    })
     @PostMapping
-    public ResponseEntity<EmployeeDTO> save(@RequestBody EmployeeDTO employeeDTO) {
+    public ResponseEntity<EmployeeDTO> save(@Parameter(description = "Empleado que se guardara, dni unico dato requerido")
+                                                @RequestBody EmployeeDTO employeeDTO) {
         return ResponseEntity.ok(service.save(employeeDTO));
     }
 
